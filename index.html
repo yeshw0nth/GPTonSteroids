@@ -3,21 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GPTonsteroids – The Ultimate AI Playground</title>
+    <title>GPTonsteroids</title>
     <script src="https://js.puter.com/v2/"></script>
-    <!-- Apple-inspired font and icons -->
-    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
     <style>
         :root {
-            --background: #f6f7f9;
-            --glass: rgba(255,255,255,0.7);
+            --background: #f7f7f9;
+            --glass: rgba(255,255,255,0.8);
             --glass-border: rgba(200,200,200,0.3);
             --primary: #111;
             --secondary: #666;
             --accent: #007aff;
-            --radius: 20px;
-            --shadow: 0 8px 32px rgba(0,0,0,0.08);
+            --radius: 18px;
+            --shadow: 0 4px 24px rgba(0,0,0,0.07);
         }
         html, body {
             height: 100%;
@@ -25,120 +24,25 @@
         body {
             min-height: 100vh;
             background: var(--background);
-            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
             color: var(--primary);
             margin: 0;
             display: flex;
             flex-direction: column;
-        }
-        .navbar {
-            width: 100%;
-            background: var(--glass);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--glass-border);
-            box-shadow: var(--shadow);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1.2rem 2.5vw;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-        .navbar .logo {
-            font-size: 1.6rem;
-            font-weight: 700;
-            letter-spacing: -1px;
-            color: var(--accent);
-            display: flex;
-            align-items: center;
-            gap: 0.7rem;
-        }
-        .navbar .logo i {
-            font-size: 1.5rem;
-        }
-        .navbar .links {
-            display: flex;
-            gap: 1.5rem;
-        }
-        .navbar .links a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
-            opacity: 0.7;
-            transition: opacity 0.2s;
-        }
-        .navbar .links a:hover {
-            opacity: 1;
-        }
-        .container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: flex-start;
-            padding: 2vw 0 3vw 0;
-            max-width: 900px;
-            margin: 0 auto;
+        }
+        .main {
             width: 100%;
-        }
-        .hero {
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
-        .hero h1 {
-            font-size: 2.7rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            letter-spacing: -1px;
-        }
-        .hero p {
-            color: var(--secondary);
-            font-size: 1.2rem;
-            font-weight: 400;
-            margin-bottom: 0.5rem;
-        }
-        .features {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            margin-bottom: 2.5rem;
-            flex-wrap: wrap;
-        }
-        .feature {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            padding: 1.2rem 1.5rem;
-            min-width: 180px;
-            text-align: center;
-            font-size: 1rem;
-            color: var(--primary);
+            max-width: 420px;
+            margin: 3vw 0 2vw 0;
             display: flex;
             flex-direction: column;
+            gap: 2.2rem;
             align-items: center;
-            gap: 0.5rem;
         }
-        .feature i {
-            color: var(--accent);
-            font-size: 1.5rem;
-        }
-        .main-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2.5rem;
+        .card {
             width: 100%;
-            margin-bottom: 2.5rem;
-        }
-        @media (max-width: 900px) {
-            .main-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-        }
-        .glass-card {
             background: var(--glass);
             border: 1px solid var(--glass-border);
             border-radius: var(--radius);
@@ -146,49 +50,35 @@
             padding: 2rem 1.5rem 1.5rem 1.5rem;
             display: flex;
             flex-direction: column;
-            gap: 1.2rem;
+            gap: 1.1rem;
+            align-items: stretch;
         }
-        .glass-card h2 {
-            font-size: 1.3rem;
+        .card h2 {
+            font-size: 1.25rem;
             font-weight: 600;
-            margin-bottom: 0.5rem;
+            margin: 0 0 0.5rem 0;
+            letter-spacing: -0.5px;
+            color: var(--primary);
+            text-align: left;
         }
-        .chat-container {
-            flex: 1;
-            min-height: 220px;
-            max-height: 320px;
-            overflow-y: auto;
-            margin-bottom: 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.7rem;
-        }
-        .message {
-            padding: 0.8rem 1.1rem;
-            border-radius: 1.2rem;
-            max-width: 80%;
-            font-size: 1rem;
-            word-break: break-word;
+        .output-area {
+            min-height: 80px;
             background: #fff;
+            border-radius: 1rem;
+            padding: 1rem 1.2rem;
+            font-size: 1.08rem;
             color: var(--primary);
             box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-        }
-        .user-message {
-            background: var(--accent);
-            color: #fff;
-            margin-left: auto;
-        }
-        .ai-message {
-            background: #fff;
-            color: var(--primary);
-            margin-right: auto;
+            margin-bottom: 0.5rem;
+            word-break: break-word;
+            white-space: pre-line;
         }
         .input-row {
             display: flex;
             gap: 0.7rem;
             align-items: center;
         }
-        .input-row textarea, .input-row input {
+        .input-row textarea, .input-row input[type="text"] {
             flex: 1;
             border: 1px solid var(--glass-border);
             border-radius: 1.2rem;
@@ -200,7 +90,7 @@
             outline: none;
             transition: border 0.2s;
         }
-        .input-row textarea:focus, .input-row input:focus {
+        .input-row textarea:focus, .input-row input[type="text"]:focus {
             border: 1.5px solid var(--accent);
         }
         .input-row button {
@@ -209,18 +99,20 @@
             border: none;
             border-radius: 1.2rem;
             padding: 0.9rem 1.5rem;
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
             transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .input-row button:hover {
             background: #0051a8;
         }
         .image-preview {
             width: 100%;
-            min-height: 220px;
-            max-height: 320px;
+            min-height: 180px;
             background: #f8fafd;
             border-radius: 1.2rem;
             display: flex;
@@ -228,33 +120,13 @@
             justify-content: center;
             overflow: hidden;
             border: 1px solid var(--glass-border);
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
         }
         .image-preview img {
             max-width: 100%;
-            max-height: 100%;
+            max-height: 220px;
             object-fit: contain;
             border-radius: 1.2rem;
-        }
-        .model-select {
-            margin-bottom: 0.7rem;
-            display: flex;
-            gap: 0.7rem;
-        }
-        .model-select select {
-            border: 1px solid var(--glass-border);
-            border-radius: 1.2rem;
-            padding: 0.5rem 1rem;
-            font-size: 1rem;
-            background: #f8fafd;
-            color: var(--primary);
-            outline: none;
-        }
-        .vision-upload {
-            display: flex;
-            flex-direction: column;
-            gap: 0.7rem;
-            align-items: flex-start;
         }
         .vision-upload input[type="file"] {
             display: none;
@@ -268,139 +140,105 @@
             font-weight: 500;
             cursor: pointer;
             margin-bottom: 0.5rem;
+            display: inline-block;
         }
         .vision-preview {
             max-width: 100%;
-            max-height: 180px;
+            max-height: 120px;
             border-radius: 1.2rem;
             margin-bottom: 0.5rem;
+            display: none;
         }
-        .footer {
-            text-align: center;
-            color: var(--secondary);
+        .error {
+            color: #d32f2f;
             font-size: 1rem;
-            padding: 2rem 0 1rem 0;
-            opacity: 0.7;
+            margin: 0.5rem 0 0 0;
+            text-align: left;
+        }
+        @media (max-width: 600px) {
+            .main {
+                max-width: 98vw;
+                padding: 0 2vw;
+            }
+            .card {
+                padding: 1.2rem 0.7rem 1rem 0.7rem;
+            }
         }
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo"><i class="fa-solid fa-bolt"></i>GPTonsteroids</div>
-        <div class="links">
-            <a href="https://docs.puter.com/" target="_blank">Docs</a>
-            <a href="https://developer.puter.com/tutorials/serverless-ai-forever-free-for-developers/" target="_blank">Tutorials</a>
-            <a href="https://puter.com/" target="_blank">Puter</a>
-        </div>
-    </nav>
-    <div class="container">
-        <div class="hero">
-            <h1>The Ultimate AI Playground</h1>
-            <p>Chat, generate images, analyze pictures, and more – all powered by Puter.js, forever free.</p>
-        </div>
-        <div class="features">
-            <div class="feature"><i class="fa-solid fa-comments"></i> GPT-4o Mini</div>
-            <div class="feature"><i class="fa-solid fa-brain"></i> Claude 3.5 Sonnet</div>
-            <div class="feature"><i class="fa-solid fa-robot"></i> Llama 3</div>
-            <div class="feature"><i class="fa-solid fa-image"></i> DALL·E 3</div>
-            <div class="feature"><i class="fa-solid fa-eye"></i> GPT-4 Vision</div>
-        </div>
-        <div class="main-grid">
-            <!-- AI Chat Section -->
-            <div class="glass-card">
-                <h2>AI Chat</h2>
-                <div class="model-select">
-                    <label for="chatModel">Model:</label>
-                    <select id="chatModel">
-                        <option value="gpt-4o-mini">GPT-4o Mini</option>
-                        <option value="claude-3-5-sonnet">Claude 3.5 Sonnet</option>
-                        <option value="meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo">Llama 3</option>
-                    </select>
-                </div>
-                <div class="chat-container" id="chatContainer"></div>
-                <div class="input-row">
-                    <textarea id="userInput" placeholder="Type your message..." rows="2"></textarea>
-                    <button onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i></button>
-                </div>
+    <div class="main">
+        <!-- Chat Section -->
+        <div class="card">
+            <h2>Chat</h2>
+            <div class="output-area" id="chatOutput">Ask anything...</div>
+            <div class="input-row">
+                <textarea id="chatInput" placeholder="Type your message..." rows="2"></textarea>
+                <button onclick="sendChat()"><i class="fa-solid fa-paper-plane"></i></button>
             </div>
-            <!-- Image Generation Section -->
-            <div class="glass-card">
-                <h2>AI Image Generation</h2>
-                <div class="image-preview" id="imagePreview">
-                    <span style="color:var(--secondary);">Generated image will appear here</span>
-                </div>
-                <div class="input-row">
-                    <input type="text" id="imagePrompt" placeholder="Describe the image you want...">
-                    <button onclick="generateImage()"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
-                </div>
+            <div class="error" id="chatError"></div>
+        </div>
+        <!-- Image Generation Section -->
+        <div class="card">
+            <h2>Image Generation</h2>
+            <div class="image-preview" id="imagePreview">
+                <span style="color:var(--secondary);">Generated image will appear here</span>
             </div>
+            <div class="input-row">
+                <input type="text" id="imagePrompt" placeholder="Describe the image you want...">
+                <button onclick="generateImage()"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
+            </div>
+            <div class="error" id="imageError"></div>
         </div>
         <!-- Vision Section -->
-        <div class="glass-card" style="width:100%;max-width:600px;margin:0 auto 2.5rem auto;">
-            <h2>GPT-4 Vision</h2>
+        <div class="card">
+            <h2>Vision</h2>
             <div class="vision-upload">
                 <label for="visionFile"><i class="fa-solid fa-upload"></i> Upload Image</label>
                 <input type="file" id="visionFile" accept="image/*" onchange="handleVisionFile(event)">
-                <img id="visionPreview" class="vision-preview" style="display:none;"/>
-                <input type="text" id="visionPrompt" placeholder="Ask about the image..." style="width:100%;">
-                <button onclick="analyzeImage()"><i class="fa-solid fa-eye"></i> Analyze</button>
+                <img id="visionPreview" class="vision-preview"/>
             </div>
-            <div id="visionResult" style="margin-top:1rem;color:var(--primary);"></div>
+            <div class="input-row">
+                <input type="text" id="visionPrompt" placeholder="Ask about the image...">
+                <button onclick="analyzeImage()"><i class="fa-solid fa-eye"></i></button>
+            </div>
+            <div class="output-area" id="visionOutput">Analysis will appear here</div>
+            <div class="error" id="visionError"></div>
         </div>
     </div>
-    <div class="footer">
-        Built with <a href="https://puter.com/" target="_blank" style="color:var(--accent);text-decoration:none;">Puter.js</a> &middot; <a href="https://github.com/HeyPuter/puter" target="_blank" style="color:var(--accent);text-decoration:none;">Open Source</a>
-    </div>
     <script>
-        // --- AI Chat ---
-        let chatHistory = [];
-        function addMessage(content, isUser = false) {
-            const chatContainer = document.getElementById('chatContainer');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${isUser ? 'user-message' : 'ai-message'}`;
-            messageDiv.textContent = content;
-            chatContainer.appendChild(messageDiv);
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-        }
-        async function sendMessage() {
-            const userInput = document.getElementById('userInput');
-            const model = document.getElementById('chatModel').value;
-            const message = userInput.value.trim();
+        // --- Chat ---
+        async function sendChat() {
+            const input = document.getElementById('chatInput');
+            const output = document.getElementById('chatOutput');
+            const error = document.getElementById('chatError');
+            const message = input.value.trim();
             if (!message) return;
-            addMessage(message, true);
-            userInput.value = '';
-            addMessage('Thinking...', false);
+            error.textContent = '';
+            output.textContent = 'Thinking...';
             try {
-                let opts = {};
-                if (model !== 'gpt-4o-mini') opts.model = model;
-                const response = await puter.ai.chat(message, opts);
-                // Remove 'Thinking...' placeholder
-                const chatContainer = document.getElementById('chatContainer');
-                chatContainer.removeChild(chatContainer.lastChild);
-                addMessage(response, false);
-                chatHistory.push({role:'user',content:message},{role:'assistant',content:response});
-            } catch (error) {
-                const chatContainer = document.getElementById('chatContainer');
-                chatContainer.removeChild(chatContainer.lastChild);
-                addMessage('Sorry, there was an error processing your request.', false);
-                console.error(error);
+                const response = await puter.ai.chat(message);
+                output.textContent = response;
+            } catch (e) {
+                output.textContent = '';
+                error.textContent = 'Error: ' + (e?.message || 'Could not get response.');
             }
         }
         // --- Image Generation ---
         async function generateImage() {
-            const imagePrompt = document.getElementById('imagePrompt');
-            const prompt = imagePrompt.value.trim();
+            const prompt = document.getElementById('imagePrompt').value.trim();
+            const preview = document.getElementById('imagePreview');
+            const error = document.getElementById('imageError');
+            error.textContent = '';
             if (!prompt) return;
-            const imagePreview = document.getElementById('imagePreview');
-            imagePreview.innerHTML = '<span style="color:var(--secondary);">Generating image...</span>';
+            preview.innerHTML = '<span style="color:var(--secondary);">Generating image...</span>';
             try {
-                // Remove test mode for real output
                 const image = await puter.ai.txt2img(prompt, false);
-                imagePreview.innerHTML = '';
-                imagePreview.appendChild(image);
-            } catch (error) {
-                imagePreview.innerHTML = '<span style="color:red;">Error generating image</span>';
-                console.error(error);
+                preview.innerHTML = '';
+                preview.appendChild(image);
+            } catch (e) {
+                preview.innerHTML = '<span style="color:#d32f2f;">Error generating image</span>';
+                error.textContent = 'Error: ' + (e?.message || 'Could not generate image.');
             }
         }
         // --- Vision ---
@@ -419,12 +257,14 @@
         }
         async function analyzeImage() {
             const prompt = document.getElementById('visionPrompt').value.trim() || 'What do you see?';
-            const visionResult = document.getElementById('visionResult');
+            const output = document.getElementById('visionOutput');
+            const error = document.getElementById('visionError');
+            error.textContent = '';
             if (!visionImageUrl) {
-                visionResult.textContent = 'Please upload an image first.';
+                error.textContent = 'Please upload an image first.';
                 return;
             }
-            visionResult.textContent = 'Analyzing...';
+            output.textContent = 'Analyzing...';
             try {
                 // Upload image to Puter cloud and get a URL
                 const fileName = 'vision-' + Date.now() + '.png';
@@ -432,10 +272,10 @@
                 const uploaded = await puter.fs.write(fileName, file);
                 const url = uploaded.url || uploaded.path || fileName;
                 const response = await puter.ai.chat(prompt, url);
-                visionResult.textContent = response;
-            } catch (error) {
-                visionResult.textContent = 'Error analyzing image.';
-                console.error(error);
+                output.textContent = response;
+            } catch (e) {
+                output.textContent = '';
+                error.textContent = 'Error: ' + (e?.message || 'Could not analyze image.');
             }
         }
         // Helper: Convert dataURL to Blob
