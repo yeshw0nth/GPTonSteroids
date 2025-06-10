@@ -3,331 +3,357 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GPTonsteroids - Ultimate AI Experience</title>
+    <title>GPTonsteroids – The Ultimate AI Playground</title>
     <script src="https://js.puter.com/v2/"></script>
+    <!-- Apple-inspired font and icons -->
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
     <style>
         :root {
-            --primary: #ffffff;
-            --secondary: #f5f5f5;
-            --accent: #000000;
-            --background: #fafafa;
-            --text: #333333;
-            --glass: rgba(255, 255, 255, 0.7);
-            --glass-border: rgba(255, 255, 255, 0.5);
-            --glass-shadow: rgba(0, 0, 0, 0.05);
+            --background: #f6f7f9;
+            --glass: rgba(255,255,255,0.7);
+            --glass-border: rgba(200,200,200,0.3);
+            --primary: #111;
+            --secondary: #666;
+            --accent: #007aff;
+            --radius: 20px;
+            --shadow: 0 8px 32px rgba(0,0,0,0.08);
         }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        html, body {
+            height: 100%;
         }
-        
         body {
-            background: var(--background);
-            color: var(--text);
             min-height: 100vh;
+            background: var(--background);
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            color: var(--primary);
+            margin: 0;
             display: flex;
             flex-direction: column;
-            background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
         }
-        
-        .header {
+        .navbar {
+            width: 100%;
             background: var(--glass);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            padding: 1.5rem;
-            text-align: center;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--glass-border);
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.2rem 2.5vw;
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 10;
         }
-        
-        .header h1 {
-            font-size: 2rem;
+        .navbar .logo {
+            font-size: 1.6rem;
             font-weight: 700;
+            letter-spacing: -1px;
             color: var(--accent);
-            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
         }
-        
-        .main {
+        .navbar .logo i {
+            font-size: 1.5rem;
+        }
+        .navbar .links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        .navbar .links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        .navbar .links a:hover {
+            opacity: 1;
+        }
+        .container {
             flex: 1;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            padding: 2rem;
-            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 2vw 0 3vw 0;
+            max-width: 900px;
             margin: 0 auto;
             width: 100%;
         }
-        
-        .chat-section, .image-section {
+        .hero {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        .hero h1 {
+            font-size: 2.7rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+        .hero p {
+            color: var(--secondary);
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+        .features {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+        .feature {
             background: var(--glass);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 1.5rem;
-            padding: 1.5rem;
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.2rem 1.5rem;
+            min-width: 180px;
+            text-align: center;
+            font-size: 1rem;
+            color: var(--primary);
             display: flex;
             flex-direction: column;
-            gap: 1rem;
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 8px 32px var(--glass-shadow);
-        }
-        
-        .chat-container {
-            flex: 1;
-            overflow-y: auto;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 1rem;
-            max-height: 500px;
-            border: 1px solid var(--glass-border);
-        }
-        
-        .message {
-            margin-bottom: 1rem;
-            padding: 1rem;
-            border-radius: 1rem;
-            max-width: 80%;
-            background: var(--glass);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            border: 1px solid var(--glass-border);
-        }
-        
-        .user-message {
-            background: var(--accent);
-            color: var(--primary);
-            margin-left: auto;
-        }
-        
-        .ai-message {
-            background: var(--glass);
-            color: var(--text);
-        }
-        
-        .input-container {
-            display: flex;
+            align-items: center;
             gap: 0.5rem;
         }
-        
-        input, textarea {
-            flex: 1;
-            padding: 1rem;
-            border: 1px solid var(--glass-border);
-            border-radius: 1rem;
+        .feature i {
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            width: 100%;
+            margin-bottom: 2.5rem;
+        }
+        @media (max-width: 900px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+        .glass-card {
             background: var(--glass);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            color: var(--text);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        .glass-card h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .chat-container {
+            flex: 1;
+            min-height: 220px;
+            max-height: 320px;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+        .message {
+            padding: 0.8rem 1.1rem;
+            border-radius: 1.2rem;
+            max-width: 80%;
             font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-        
-        input:focus, textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
-        }
-        
-        button {
-            padding: 1rem 1.5rem;
-            border: none;
-            border-radius: 1rem;
-            background: var(--accent);
+            word-break: break-word;
+            background: #fff;
             color: var(--primary);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+        .user-message {
+            background: var(--accent);
+            color: #fff;
+            margin-left: auto;
+        }
+        .ai-message {
+            background: #fff;
+            color: var(--primary);
+            margin-right: auto;
+        }
+        .input-row {
+            display: flex;
+            gap: 0.7rem;
+            align-items: center;
+        }
+        .input-row textarea, .input-row input {
+            flex: 1;
+            border: 1px solid var(--glass-border);
+            border-radius: 1.2rem;
+            padding: 0.9rem 1.2rem;
+            font-size: 1rem;
+            background: #f8fafd;
+            color: var(--primary);
+            resize: none;
+            outline: none;
+            transition: border 0.2s;
+        }
+        .input-row textarea:focus, .input-row input:focus {
+            border: 1.5px solid var(--accent);
+        }
+        .input-row button {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 1.2rem;
+            padding: 0.9rem 1.5rem;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            transition: background 0.2s;
         }
-        
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        .input-row button:hover {
+            background: #0051a8;
         }
-        
         .image-preview {
             width: 100%;
-            height: 300px;
-            background: var(--glass);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            border-radius: 1rem;
+            min-height: 220px;
+            max-height: 320px;
+            background: #f8fafd;
+            border-radius: 1.2rem;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
             border: 1px solid var(--glass-border);
+            margin-bottom: 1rem;
         }
-        
         .image-preview img {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
+            border-radius: 1.2rem;
         }
-        
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-            padding: 0 2rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
+        .model-select {
+            margin-bottom: 0.7rem;
+            display: flex;
+            gap: 0.7rem;
         }
-        
-        .feature {
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            padding: 1.5rem;
-            border-radius: 1rem;
-            text-align: center;
+        .model-select select {
             border: 1px solid var(--glass-border);
-            box-shadow: 0 8px 32px var(--glass-shadow);
+            border-radius: 1.2rem;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            background: #f8fafd;
+            color: var(--primary);
+            outline: none;
         }
-        
-        .feature h3 {
-            color: var(--accent);
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-        
-        .feature p {
-            color: var(--text);
-            opacity: 0.8;
-        }
-        
-        @media (max-width: 768px) {
-            .main {
-                grid-template-columns: 1fr;
-            }
-            
-            .header h1 {
-                font-size: 1.5rem;
-            }
-        }
-        
-        .auth-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+        .vision-upload {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            padding: 2rem;
-            text-align: center;
+            gap: 0.7rem;
+            align-items: flex-start;
         }
-        
-        .auth-overlay h2 {
-            margin-bottom: 1rem;
-            color: var(--accent);
+        .vision-upload input[type="file"] {
+            display: none;
         }
-        
-        .auth-overlay p {
-            margin-bottom: 2rem;
-            color: var(--text);
-            opacity: 0.8;
-        }
-        
-        .auth-button {
-            padding: 1rem 2rem;
+        .vision-upload label {
             background: var(--accent);
-            color: var(--primary);
-            border: none;
-            border-radius: 1rem;
-            font-weight: 600;
+            color: #fff;
+            border-radius: 1.2rem;
+            padding: 0.7rem 1.2rem;
+            font-size: 1rem;
+            font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s ease;
+            margin-bottom: 0.5rem;
         }
-        
-        .auth-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        .vision-preview {
+            max-width: 100%;
+            max-height: 180px;
+            border-radius: 1.2rem;
+            margin-bottom: 0.5rem;
         }
-        
-        .hidden {
-            display: none !important;
+        .footer {
+            text-align: center;
+            color: var(--secondary);
+            font-size: 1rem;
+            padding: 2rem 0 1rem 0;
+            opacity: 0.7;
         }
     </style>
 </head>
 <body>
-    <div id="authOverlay" class="auth-overlay">
-        <h2>Welcome to GPTonsteroids</h2>
-        <p>Please authenticate with Puter to continue using the app.</p>
-        <button class="auth-button" onclick="startAuth()">Authenticate with Puter</button>
-    </div>
-
-    <div id="appContent" class="hidden">
-        <div class="header">
-            <h1>GPTonsteroids</h1>
+    <nav class="navbar">
+        <div class="logo"><i class="fa-solid fa-bolt"></i>GPTonsteroids</div>
+        <div class="links">
+            <a href="https://docs.puter.com/" target="_blank">Docs</a>
+            <a href="https://developer.puter.com/tutorials/serverless-ai-forever-free-for-developers/" target="_blank">Tutorials</a>
+            <a href="https://puter.com/" target="_blank">Puter</a>
         </div>
-        
-        <div class="main">
-            <div class="chat-section">
+    </nav>
+    <div class="container">
+        <div class="hero">
+            <h1>The Ultimate AI Playground</h1>
+            <p>Chat, generate images, analyze pictures, and more – all powered by Puter.js, forever free.</p>
+        </div>
+        <div class="features">
+            <div class="feature"><i class="fa-solid fa-comments"></i> GPT-4o Mini</div>
+            <div class="feature"><i class="fa-solid fa-brain"></i> Claude 3.5 Sonnet</div>
+            <div class="feature"><i class="fa-solid fa-robot"></i> Llama 3</div>
+            <div class="feature"><i class="fa-solid fa-image"></i> DALL·E 3</div>
+            <div class="feature"><i class="fa-solid fa-eye"></i> GPT-4 Vision</div>
+        </div>
+        <div class="main-grid">
+            <!-- AI Chat Section -->
+            <div class="glass-card">
                 <h2>AI Chat</h2>
+                <div class="model-select">
+                    <label for="chatModel">Model:</label>
+                    <select id="chatModel">
+                        <option value="gpt-4o-mini">GPT-4o Mini</option>
+                        <option value="claude-3-5-sonnet">Claude 3.5 Sonnet</option>
+                        <option value="meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo">Llama 3</option>
+                    </select>
+                </div>
                 <div class="chat-container" id="chatContainer"></div>
-                <div class="input-container">
-                    <textarea id="userInput" placeholder="Ask anything..." rows="3"></textarea>
-                    <button onclick="sendMessage()">Send</button>
+                <div class="input-row">
+                    <textarea id="userInput" placeholder="Type your message..." rows="2"></textarea>
+                    <button onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i></button>
                 </div>
             </div>
-            
-            <div class="image-section">
+            <!-- Image Generation Section -->
+            <div class="glass-card">
                 <h2>AI Image Generation</h2>
                 <div class="image-preview" id="imagePreview">
-                    <p>Generated image will appear here</p>
+                    <span style="color:var(--secondary);">Generated image will appear here</span>
                 </div>
-                <div class="input-container">
-                    <input type="text" id="imagePrompt" placeholder="Describe the image you want to generate...">
-                    <button onclick="generateImage()">Generate</button>
+                <div class="input-row">
+                    <input type="text" id="imagePrompt" placeholder="Describe the image you want...">
+                    <button onclick="generateImage()"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
                 </div>
             </div>
         </div>
-        
-        <div class="features">
-            <div class="feature">
-                <h3>GPT-4o Mini</h3>
-                <p>Advanced AI chat powered by GPT-4o mini</p>
+        <!-- Vision Section -->
+        <div class="glass-card" style="width:100%;max-width:600px;margin:0 auto 2.5rem auto;">
+            <h2>GPT-4 Vision</h2>
+            <div class="vision-upload">
+                <label for="visionFile"><i class="fa-solid fa-upload"></i> Upload Image</label>
+                <input type="file" id="visionFile" accept="image/*" onchange="handleVisionFile(event)">
+                <img id="visionPreview" class="vision-preview" style="display:none;"/>
+                <input type="text" id="visionPrompt" placeholder="Ask about the image..." style="width:100%;">
+                <button onclick="analyzeImage()"><i class="fa-solid fa-eye"></i> Analyze</button>
             </div>
-            <div class="feature">
-                <h3>DALL·E 3</h3>
-                <p>State-of-the-art image generation</p>
-            </div>
+            <div id="visionResult" style="margin-top:1rem;color:var(--primary);"></div>
         </div>
     </div>
-
+    <div class="footer">
+        Built with <a href="https://puter.com/" target="_blank" style="color:var(--accent);text-decoration:none;">Puter.js</a> &middot; <a href="https://github.com/HeyPuter/puter" target="_blank" style="color:var(--accent);text-decoration:none;">Open Source</a>
+    </div>
     <script>
-        // Initialize chat history
+        // --- AI Chat ---
         let chatHistory = [];
-        let isAuthenticated = false;
-        
-        // Function to start authentication
-        async function startAuth() {
-            try {
-                // Try to use a Puter service to trigger authentication
-                await puter.ai.chat('Hello');
-                isAuthenticated = true;
-                document.getElementById('authOverlay').classList.add('hidden');
-                document.getElementById('appContent').classList.remove('hidden');
-            } catch (error) {
-                console.error('Authentication failed:', error);
-                // The error will trigger Puter's built-in auth flow
-            }
-        }
-        
-        // Function to add message to chat
         function addMessage(content, isUser = false) {
             const chatContainer = document.getElementById('chatContainer');
             const messageDiv = document.createElement('div');
@@ -336,70 +362,88 @@
             chatContainer.appendChild(messageDiv);
             chatContainer.scrollTop = chatContainer.scrollHeight;
         }
-        
-        // Function to send message
         async function sendMessage() {
-            if (!isAuthenticated) {
-                alert('Please authenticate first');
-                return;
-            }
-            
             const userInput = document.getElementById('userInput');
+            const model = document.getElementById('chatModel').value;
             const message = userInput.value.trim();
-            
             if (!message) return;
-            
-            // Add user message to chat
             addMessage(message, true);
             userInput.value = '';
-            
+            addMessage('Thinking...', false);
             try {
-                // Get AI response
-                const response = await puter.ai.chat(message);
-                addMessage(response);
-                
-                // Save to chat history
-                chatHistory.push({
-                    role: 'user',
-                    content: message
-                }, {
-                    role: 'assistant',
-                    content: response
-                });
+                let opts = {};
+                if (model !== 'gpt-4o-mini') opts.model = model;
+                const response = await puter.ai.chat(message, opts);
+                // Remove 'Thinking...' placeholder
+                const chatContainer = document.getElementById('chatContainer');
+                chatContainer.removeChild(chatContainer.lastChild);
+                addMessage(response, false);
+                chatHistory.push({role:'user',content:message},{role:'assistant',content:response});
             } catch (error) {
-                addMessage('Sorry, there was an error processing your request.');
+                const chatContainer = document.getElementById('chatContainer');
+                chatContainer.removeChild(chatContainer.lastChild);
+                addMessage('Sorry, there was an error processing your request.', false);
                 console.error(error);
             }
         }
-        
-        // Function to generate image
+        // --- Image Generation ---
         async function generateImage() {
-            if (!isAuthenticated) {
-                alert('Please authenticate first');
-                return;
-            }
-            
             const imagePrompt = document.getElementById('imagePrompt');
             const prompt = imagePrompt.value.trim();
-            
             if (!prompt) return;
-            
             const imagePreview = document.getElementById('imagePreview');
-            imagePreview.innerHTML = '<p>Generating image...</p>';
-            
+            imagePreview.innerHTML = '<span style="color:var(--secondary);">Generating image...</span>';
             try {
-                // Generate image using DALL·E 3
-                const image = await puter.ai.txt2img(prompt, true);
+                // Remove test mode for real output
+                const image = await puter.ai.txt2img(prompt, false);
                 imagePreview.innerHTML = '';
                 imagePreview.appendChild(image);
             } catch (error) {
-                imagePreview.innerHTML = '<p>Error generating image</p>';
+                imagePreview.innerHTML = '<span style="color:red;">Error generating image</span>';
                 console.error(error);
             }
         }
-        
-        // Initialize app
-        startAuth();
+        // --- Vision ---
+        let visionImageUrl = '';
+        function handleVisionFile(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                visionImageUrl = e.target.result;
+                const visionPreview = document.getElementById('visionPreview');
+                visionPreview.src = visionImageUrl;
+                visionPreview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+        async function analyzeImage() {
+            const prompt = document.getElementById('visionPrompt').value.trim() || 'What do you see?';
+            const visionResult = document.getElementById('visionResult');
+            if (!visionImageUrl) {
+                visionResult.textContent = 'Please upload an image first.';
+                return;
+            }
+            visionResult.textContent = 'Analyzing...';
+            try {
+                // Upload image to Puter cloud and get a URL
+                const fileName = 'vision-' + Date.now() + '.png';
+                const file = dataURLtoBlob(visionImageUrl);
+                const uploaded = await puter.fs.write(fileName, file);
+                const url = uploaded.url || uploaded.path || fileName;
+                const response = await puter.ai.chat(prompt, url);
+                visionResult.textContent = response;
+            } catch (error) {
+                visionResult.textContent = 'Error analyzing image.';
+                console.error(error);
+            }
+        }
+        // Helper: Convert dataURL to Blob
+        function dataURLtoBlob(dataurl) {
+            var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1], bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+            while(n--){ u8arr[n] = bstr.charCodeAt(n); }
+            return new Blob([u8arr], {type:mime});
+        }
     </script>
 </body>
 </html> 
